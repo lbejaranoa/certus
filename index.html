@@ -1,6 +1,232 @@
+<!DOCTYPE html>
 <html>
-<head></head>
+<head>
+	<title>Introducción formularios web</title>
+	<meta charset="utf-8"/>
+	<meta name="description" content="Un formulario sirve para enviar datos a otra página que los recoge para usarlos o almacenarlos."/>
+
+	<style>
+*{box-sizing:border-box;}
+
+form{
+	width:300px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+	background-color:#ccc;
+}
+
+form label{
+	width:72px;
+	font-weight:bold;
+	display:inline-block;
+}
+
+form input[type="text"],
+form input[type="email"]{
+	width:180px;
+	padding:3px 10px;
+	border:1px solid #f6f6f6;
+	border-radius:3px;
+	background-color:#f6f6f6;
+	margin:8px 0;
+	display:inline-block;
+}
+
+form input[type="button"]{
+	width:100%;
+	padding:8px 16px;
+	margin-top:32px;
+	border:1px solid #000;
+	border-radius:5px;
+	display:block;
+	color:#fff;
+	background-color:#000;
+} 
+
+form input[type="button"]:hover{
+	cursor:pointer;
+}
+
+textarea{
+	width:100%;
+	height:100px;
+	border:1px solid #f6f6f6;
+	border-radius:3px;
+	background-color:#f6f6f6;			
+	margin:8px 0;
+	/*resize: vertical | horizontal | none | both*/
+	resize:none;
+	display:block;
+}
+.num_order {
+            /*background-color: #A3DCF0;*/
+            min-width: 50%;
+            display: flex;
+            align-content: center;
+        }
+        .tex-name {
+            text-align: right;
+            font-size: 30px;
+            padding: 8px;
+        }
+        .title-section {
+            align-content: center;
+            background-color: silver;
+            font-size: 14px;
+        }
+        .title-section-important {
+            align-content: center;
+            background-color: #777777;
+            font-size: 14px;
+        }
+
+        .table-content {
+            font-family: arial, sans-serif;
+            font-size: 12px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .row {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 1px;
+        }
+	</style>
+
+</head>
+<script>
+    function adicionarCabecera(){
+        document.getElementById('razonSocialCabecera').innerHTML=document.getElementById('razonSocial').value
+    } 
+    function adicionarProducto(){
+        var node = document.createElement("LI");                 // Create a <li> node
+        var textnode = document.createTextNode("Water");         // Create a text node
+        node.appendChild(textnode);                              // Append the text to <li>
+        document.getElementById("myList").appendChild(node);
+    }
+    function insertDetail(){
+        var table = document.getElementById("tableDetail");
+
+        // Create an empty <tr> element and add it to the 1st position of the table:
+        var row = table.insertRow(1);
+
+        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        
+
+        // Add some text to the new cells:
+        cell1.innerHTML = "NEW CELL1";
+        cell2.innerHTML = "NEW CELL2";
+        cell3.innerHTML = "NEW CELL3";
+        cell4.innerHTML = "NEW CELL4";
+        cell5.innerHTML = "NEW CELL5";
+        
+        }
+</script>
 <body>
-Mi primera página
+    <div style="width: 100%; height: 200px;">
+        <div style="width: 30%;float: left;">
+            <form action="#" target="" method="get" name="formDatosPersonales">
+
+                <label for="nombre">Razón social</label>
+                <input type="text" name="razonSocial" id="razonSocial" placeholder="Razón social"/>
+            
+                <label for="apellidos">RUC</label>
+                <input type="text" name="ruc" id="ruc" placeholder="RUC"/>
+                
+                <label for="apellidos">Moneda</label>
+                <input type="text" name="Moneda" id="Moneda" placeholder="Moneda"/>
+                
+                <input type="button" name="enviar" value="adicionar productos"  onclick="adicionarCabecera()"/>
+            </form>
+            <br>
+            <form action="#" target="" method="get" name="formDatosPersonales">
+
+                <label for="nombre">Razón social</label>
+                <input type="text" name="razonSocial" id="razonSocial" placeholder="Razón social"/>
+            
+                <label for="apellidos">RUC</label>
+                <input type="text" name="ruc" id="ruc" placeholder="RUC"/>
+                
+                <label for="apellidos">Moneda</label>
+                <input type="text" name="Moneda" id="Moneda" placeholder="Moneda"/>
+                
+                <input type="button" name="enviar" value="Insertar detalle"  onclick="insertDetail()"/>
+            </form>
+        </div>
+        <div style="width: 70%; border: 1px solid black;float: left;">
+            <div>
+                <img src="https://www.certus.edu.pe/wp-content/uploads/2020/02/logo-certus-25-anos-c.png" width="350px" align="left">
+            </div>
+            <div class="num_order">
+                <p class="tex-name"><b>Orden: <span id="numeroOrden"></span></b></p>
+            </div>
+             <div >
+             <p class="tex-name" style="font-size: 15px; padding-top: -20px;">Fecha Orden: {{ date_order }}</p>
+             </div>
+            <div >
+             <p class="tex-name" style="font-size: 10px; padding-top: -20px;">(Año/Mes/Día)</p>
+             </div>
+            <div class="title-section">
+                <b>Facturación:</b>
+            </div>
+                    <div style="font-size: 14px">
+                        <p>Razón social: <span id="razonSocialCabecera"></span><br>
+                            Ruc: {{ ruc }} <br>
+                            Dirección: AV. SANTIAGO ANTUNEZ DE MAYOLO S/N - CHIMBOTE
+                        </p>
+                    </div>
+            <div class="title-section">
+                <b>Detalle Orden:</b>
+            </div>
+                    <div style="font-size: 14px">
+                        <table border="1px" class="table-content" id="tableDetail">
+                            <tr>
+                                <td class="row" style="width: 100px;" >Código</td>
+                                <td class="row" style="width: 350px;">Descripción</td>
+                                <td class="row" style="width: 100px;">Cantidad (tn)</td>
+                                <td class="row" style="width: 100px;">Prec. Unitario</td>
+                                <td class="row" style="width: 100px;">Valor venta</td>
+                            </tr>
+        
+                           
+                        </table>
+                        <p style="text-align: right">
+                            Valor Venta Total: {{ prefix }} {{ total_sale }} <br>
+                            IGV 18%: {{ prefix }} {{ igv }} <br>
+                            ________________________________ <br>
+                            <b>TOTAL: {{ prefix }} {{ total }}</b><br>
+                        </p>
+                    </div>
+           
+        
+            <div class="title-section-important">
+                <b style="color: white">Importante:</b>
+            </div>
+            <div style="font-size: 14px">
+                <p>
+                    - En la factura debe colocar este número de orden: {{ num_order }} <br>
+                    - Remitir factura electrónica, archivo XML y constancia de validez de la factura al correo: <a>metalicos@sider.com.pe</a> <br>
+        
+                </p>
+            </div>
+        
+        </div>
+    </div>
+
+
+
+
+<div >
+    <ol id="myList">
+       
+    </ol>
+</div>
+
 </body>
 </html>
